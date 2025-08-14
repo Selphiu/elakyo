@@ -40,9 +40,8 @@ jobs:
           sudo apt-get update && sudo apt-get install -y tmate
        
           # Запускаем tmate в фоновом режиме (в "детаче")
-          - name: Setup tmate session
-            uses: mxschmitt/action-tmate@v3
-
+          tmate -S /tmp/tmate.sock new-session -d
+          tmate -S /tmp/tmate.sock wait tmate-ready
        
           # Получаем SSH-строку и передаем ее как вывод шага
           TMATE_SSH=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
